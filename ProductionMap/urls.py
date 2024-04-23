@@ -1,5 +1,5 @@
 """
-URL configuration for ProductionMap project.
+URL configuration for TestingSVG project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -15,8 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from AgentMap import views as agent_map_view
 
 urlpatterns = [
+    path('AgentMap/', include('AgentMap.urls')),  # Include the urls found in AgentMap.urls
+    path('get_companies/<str:state_code>/', agent_map_view.get_companies, name='get_companies'),
+    path('view_form/<int:form_id>/', agent_map_view.view_form, name='view_form'),
     path('admin/', admin.site.urls),
 ]
